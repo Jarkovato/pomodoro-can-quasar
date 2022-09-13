@@ -32,14 +32,15 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 import { useQuasar } from 'quasar';
-
+import { capitalizeFirstLetter } from './helpers';
 import languages from 'quasar/lang/index.json';
 
 const appLanguages = languages.filter((lang) =>
   ['en-US', 'ru'].includes(lang.isoName)
 );
+
 const langOptions = appLanguages.map((lang) => ({
-  label: lang.nativeName,
+  label: capitalizeFirstLetter(lang.nativeName),
   value: lang.isoName,
 }));
 
@@ -51,7 +52,7 @@ export default defineComponent({
     const lang = ref($q.lang.isoName);
 
     watch(lang, (val) => {
-      import('quasar/lang/' + val).then((lang) => {
+      import(`quasar/lang/${val}`).then((lang) => {
         $q.lang.set(lang.default);
       });
     });

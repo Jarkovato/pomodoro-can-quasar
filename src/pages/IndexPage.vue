@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-top justify-evenly">
-    <h2>Заголовок</h2>
+    <h2>{{ $t('hello') }}</h2>
   </q-page>
 </template>
 
